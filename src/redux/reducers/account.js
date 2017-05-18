@@ -26,17 +26,22 @@ function account(state = defaultState, action) {
       return { ...state, phoneNumber: value };
     }
     case 'GET_TOKEN': {
-      return ({
+      return {
         ...state,
         token: action.token,
-      });
+      };
     }
     case 'PLACEHOLDER': {
-      return ({
+      return {
         ...state,
         placeHolder: action.value,
-      });
+      };
     }
+    case 'CLEAR_TOKEN':
+      return {
+        ...state,
+        token: '',
+      };
     default:
       return state;
   }

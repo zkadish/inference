@@ -6,6 +6,23 @@ import Loader from 'components/Loader';
 import CopyButton from 'components/CopyButton';
 
 function App({children, token}) {
+  const copyToken = (
+    <div className="token">
+      <div
+        id="value"
+        className="token__value"
+      >
+        {token}
+      </div>
+      <CopyButton />
+    </div>
+  );
+
+  const loader = (
+    <div className="loader">
+      <Loader />
+    </div>
+  );
 
   return(
     <div>
@@ -14,17 +31,10 @@ function App({children, token}) {
         <form onSubmit={(e) => e.preventDefault()}>
           <InputButton />
         </form>
-        {/*<Loader />*/}
-        <div
-          id="token"
-          className="interface__token"
-        >
-          {token}
-        </div>
-        <CopyButton />
+        {token ? copyToken : loader}
       </div>
     </div>
-  )
+  );
 }
 
 export default connect(

@@ -11,6 +11,7 @@ function InputButton({
   getToken,
   placeHolder,
   message,
+  clearToken,
 }) {
   const validateNum = (e) => {
     const index = e.target.value.length - 1;
@@ -25,6 +26,7 @@ function InputButton({
   };
 
   const onSubmit = () => {
+    clearToken();
     getToken(phoneNumber);
     placeHolder(phoneNumber);
     enterNumber('');
@@ -73,6 +75,7 @@ export default connect(
         dispatch(action.getToken(uuid()));
       }, 1000);
     },
+    clearToken: () => dispatch(action.clearToken()),
     placeHolder: message => dispatch(action.placeHolder(message)),
   }),
 )(InputButton);

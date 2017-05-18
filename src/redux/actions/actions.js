@@ -2,6 +2,7 @@
 const ENTER_NUMBER = 'ENTER_NUMBER';
 const GET_TOKEN = 'GET_TOKEN';
 const PLACEHOLDER = 'PLACEHOLDER';
+const CLEAR_TOKEN = 'CLEAR_TOKEN';
 
 export function enterNumber(value) {
   return {
@@ -21,5 +22,11 @@ export function placeHolder(value) {
   return {
     type: PLACEHOLDER,
     value,
+  };
+}
+
+export function clearToken() {
+  return {
+    type: CLEAR_TOKEN,
   };
 }

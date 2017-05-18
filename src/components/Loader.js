@@ -3,7 +3,7 @@ import React from 'react';
 
 function Loader() {
   return (
-    <div className="spin1 spinner"></div>
+    <div className="spinner"></div>
   )
 }
 
