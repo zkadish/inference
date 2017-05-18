@@ -1,28 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as action from 'redux/actions/actions';
+import InputButton from 'components/InputButton';
+import Loader from 'components/Loader';
+import CopyButton from 'components/CopyButton';
 
-function App({children, number, increment, decrement}) {
+function App({children, token}) {
+
   return(
     <div>
-      {children}
-      <br />
-      <button onClick={() => increment()}>increment</button>
-      <button onClick={() => decrement()}>decrement</button>
-      <div>{number}</div>
+      <h1 className="title">{children}</h1>
+      <div className="interface">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <InputButton />
+        </form>
+        {/*<Loader />*/}
+        <div
+          id="token"
+          className="interface__token"
+        >
+          {token}
+        </div>
+        <CopyButton />
+      </div>
     </div>
   )
 }
 
-
-
 export default connect(
   (state) => ({
-    number: state.reducers,
+    token: state.account.token,
   }),
-  (dispatch) => ({
-    increment: () => dispatch(action.increment()),
-    decrement: () => dispatch(action.decrement()),
-  })
 )(App);

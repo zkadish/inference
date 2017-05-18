@@ -5,14 +5,14 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 const GLOBALS = {
-  __DEV__: JSON.stringify(process.env.NODE_ENV === "development")
-}
+  __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
+};
 
 console.log(GLOBALS.__DEV__);
 
 const extractSass = new ExtractTextWebpackPlugin({
-  filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development"
+  filename: '[name].[contenthash].css',
+  disable: process.env.NODE_ENV === 'development',
 });
 
 module.exports = {
@@ -22,44 +22,44 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: '[name].js'
+    filename: '[name].js',
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'react-hot-loader!babel-loader'
+        loader: 'react-hot-loader!babel-loader',
       },
       {
         test: /\.scss|.css?$/,
         loader: extractSass.extract({
           use: [{
-              loader: 'css-loader'
-            }, {
-              loader: 'sass-loader'
-            }],
-            fallback: 'style-loader'
-        })
-      }
-    ]
+            loader: 'css-loader',
+          }, {
+            loader: 'sass-loader',
+          }],
+          fallback: 'style-loader',
+        }),
+      },
+    ],
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
-    modules: ['src', 'node_modules']
+    modules: ['src', 'node_modules'],
   },
   devServer: {
     contentBase: './dist',
-    hot: true
+    hot: true,
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
     new HtmlWebpackPlugin({
-      title: 'The Minimal React Webpack Babel Setup!',
+      title: 'inference',
       template: 'src/index.html',
-      inject: true
+      inject: true,
     }),
-    extractSass
+    extractSass,
   ],
-  devtool: 'cheap-source-map'
-}
+  devtool: 'cheap-source-map',
+};

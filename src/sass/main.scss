@@ -1,4 +1,117 @@
+* {
+  box-sizing: border-box;
+}
 
-body {
-  border: 1px solid $BORDER_COLOR;
+// body {
+//   border: 1px solid $BORDER_COLOR;
+// }
+
+.title {
+  text-align: center;
+  font-size: 5rem;
+}
+
+.interface {
+  padding: 15px;
+  margin: 0 auto;
+  width: 500px;
+  border: 1px solid darkgrey;
+  border-radius: 3px;
+
+  .input-button {
+    display: flex;
+    border: 1px solid red;
+  }
+
+  &__input {
+    flex: 1;
+    padding-left: 10px;
+    width: 100px;
+    height: 40px;
+    border: 1px solid darkgrey;
+    border-width: 1px 0 1px 1px;
+    border-radius: 3px 0 0 3px;
+    outline: none;
+    font-size: 1em;
+  }
+
+  &__button {
+    width: 98px;
+    height: 40px;
+    border: 1px solid darkgrey;
+    border-radius: 0 3px 3px 0;
+    outline: none;
+    font-size: 1.1em;
+  }
+
+  &__token {
+    padding: 20px;
+    border: 1px solid red;
+  }
+}
+
+// @import "compass/css3";
+
+/**
+ * Inspired by lea verou's cleanest spinner.
+ * http://lea.verou.me/2013/11/cleanest-css-spinner-ever/
+ *
+ * Configurable with 4 variables.
+ * $closeness: gap between bars.
+ * $length: length of each bars in px.
+ * $thickness: thickness of each spinner bars.
+ * $color: color of bars. In some color it won't work properly eg. "red".
+ */
+
+// Keyframe to rotate.
+@keyframes spin {
+	to { transform: rotate(1turn); }
+}
+
+// Mixin for spinner. 
+
+@mixin spinner($closeness: 8px, $length: 10, $thickness: 3px, $color: #555) {
+  $sh: ();
+  $shadow: ();
+  $w: $closeness;
+  $n: $length;
+  $k: floor($n*0.75);
+  $f: floor($w*0.75);
+  
+  // Calculate box-shadow.
+  @for $j from 0 through $length {
+    $sh: $sh, 0 $j+($w) $color, $j+($w) 0 lighten($color, 30%), 0px (-$j)+(-$w) lighten($color, 50%), (-$j)+(-$w) 0px lighten($color, 62%);
+  }
+  @for $i from 0 through $k {
+    $shadow: $sh, $shadow, $i+($f) $i+($f) lighten($color, 20%), (-$i)+(-$f) (-$i)+(-$f) lighten($color, 60%), $i+($f) (-$i)+(-$f) lighten($color, 40%), (-$i)+(-$f) $i+($f) lighten($color, 65%);
+  }
+
+  // Implements rules.
+  width: $thickness;
+	height: $thickness;
+  box-shadow: $shadow;
+}
+
+.spin1 {
+  @include spinner();
+}
+
+.spin2 {
+  @include spinner($length: 15, $color: green);
+}
+
+.spin3 {
+  @include spinner($closeness: 14px, $thickness: 10px, $length: 10, $color: #555);
+}
+
+
+// common styling.
+.spinner {
+  display: inline-block;
+  margin: 20px 20px;
+	background: transparent;
+  // border: 1px solid red;
+  // border-radius: 100%;
+  animation: spin .5s infinite steps(8);
+  transform-origin: 50% 50%;
 }
