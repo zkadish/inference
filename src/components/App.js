@@ -5,7 +5,7 @@ import InputButton from 'components/InputButton';
 import Loader from 'components/Loader';
 import CopyButton from 'components/CopyButton';
 
-function App({children, token}) {
+function App({children, token, placeHolder}) {
   const copyToken = (
     <div className="token">
       <div
@@ -20,7 +20,7 @@ function App({children, token}) {
 
   const loader = (
     <div className="loader">
-      <Loader />
+      { placeHolder.startsWith('enter') ? null : <Loader />}
     </div>
   );
 
@@ -39,6 +39,7 @@ function App({children, token}) {
 
 export default connect(
   (state) => ({
+    placeHolder: state.account.placeHolder,
     token: state.account.token,
   }),
 )(App);
