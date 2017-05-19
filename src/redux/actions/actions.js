@@ -4,10 +4,11 @@ const GET_TOKEN = 'GET_TOKEN';
 const PLACEHOLDER = 'PLACEHOLDER';
 const CLEAR_TOKEN = 'CLEAR_TOKEN';
 
-export function enterNumber(value) {
+export function enterNumber(value, backspace) {
   return {
     type: ENTER_NUMBER,
     value,
+    backspace,
   };
 }
 

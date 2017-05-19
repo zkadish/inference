@@ -12,13 +12,13 @@ function account(state = defaultState, action) {
       const length = value.length;
       switch (length) {
         case 1:
-          value = `(${value}`;
+          if (!action.backspace) value = `(${value}`;
           break;
         case 4:
-          value = `${value}) `;
+          if (!action.backspace) value = `${value}) `;
           break;
         case 9:
-          value = `${value}-`;
+          if (!action.backspace) value = `${value}-`;
           break;
         default:
           break;

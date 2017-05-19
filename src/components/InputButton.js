@@ -13,23 +13,25 @@ function InputButton({
   message,
   clearToken,
 }) {
-  const validateNum = (e) => {
-    const index = e.target.value.length - 1;
-    const lastVal = e.target.value[index];
-    const regex = /\d/g;
-    if (index >= 14) return;
-    if (regex.test(lastVal)) {
-      enterNumber(e.target.value);
-    } else {
-      enterNumber(e.target.value.slice(0, index));
-    }
-  };
-
   const onSubmit = () => {
     clearToken();
     getToken(phoneNumber);
     placeHolder(phoneNumber);
     enterNumber('');
+  };
+
+  const validateNum = (e) => {
+    const index = e.target.value.length - 1;
+
+    if (e.key === 'Backspace') {
+      enterNumber(phoneNumber.slice(0, index), true);
+    }
+
+    if (index >= 13) return;
+
+    if (/\d$/.test(e.key)) {
+      enterNumber(`${phoneNumber}${e.key}`, false);
+    }
   };
 
   return (
@@ -40,7 +42,7 @@ function InputButton({
           type="text"
           value={phoneNumber}
           placeholder={message}
-          onChange={(e) => validateNum(e)}
+          onKeyDown={(e) => validateNum(e)}
         />
         <button
           className="interface__button"
@@ -67,7 +69,7 @@ export default connect(
     token: state.account.token,
   }),
   dispatch => ({
-    enterNumber: number => dispatch(action.enterNumber(number)),
+    enterNumber: (number, backspace) => dispatch(action.enterNumber(number, backspace)),
     getToken: (phoneNumber) => {
       // mock XHR fetch
       // pass the phone as a parameter?
