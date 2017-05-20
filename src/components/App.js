@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import InputButton from 'components/InputButton';
 import Loader from 'components/Loader';
 import CopyButton from 'components/CopyButton';
 
-function App({children, token, placeHolder}) {
+function App({ token, phoneNumber, placeHolder }) {
   const copyToken = (
     <div className="token">
       <div
@@ -24,11 +25,11 @@ function App({children, token, placeHolder}) {
     </div>
   );
 
-  return(
+  return (
     <div>
-      <h1 className="title">{children}</h1>
+      <h1 className="title">inference</h1>
       <div className="interface">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={e => e.preventDefault()}>
           <InputButton />
         </form>
         {token ? copyToken : loader}
@@ -37,8 +38,14 @@ function App({children, token, placeHolder}) {
   );
 }
 
+App.propTypes = {
+  placeHolder: PropTypes.string,
+  token: PropTypes.string,
+};
+
 export default connect(
-  (state) => ({
+  state => ({
+    // phoneNumber: state.account.phoneNumber,
     placeHolder: state.account.placeHolder,
     token: state.account.token,
   }),

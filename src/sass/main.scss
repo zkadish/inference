@@ -2,25 +2,26 @@
   box-sizing: border-box;
 }
 
-// body {
-//   border: 1px solid $BORDER_COLOR;
-// }
+body {
+  background: #ddd;
+}
 
 .title {
   text-align: center;
   font-size: 5rem;
+  color: $PRIMARY;
 }
 
 .interface {
   padding: 15px;
   margin: 0 auto;
   width: 500px;
-  border: 1px solid darkgrey;
+  background: #fff;
+  border: 1px solid $DARK_GREY;
   border-radius: 3px;
 
   .input-button {
     display: flex;
-    // border: 1px solid red;
   }
 
   &__input {
@@ -28,20 +29,43 @@
     padding-left: 10px;
     width: 100px;
     height: 40px;
-    border: 1px solid darkgrey;
+    border: 1px solid $DARK_GREY;
     border-width: 1px 0 1px 1px;
     border-radius: 3px 0 0 3px;
     outline: none;
+    color: $DARK_GREY;
     font-size: 1em;
+    &::placeholder {
+      color: #ccc;
+      text-align: center;
+    }
+  }
+
+  &--message {
+    &::placeholder {
+      color: #6ab80b;
+    }
+  }
+
+  &--error {
+    &::placeholder {
+      color: red;
+    }
   }
 
   &__button {
     width: 98px;
     height: 40px;
-    border: 1px solid darkgrey;
+    background: #559ae2;
+    border: 1px solid $DARK_GREY;
     border-radius: 0 3px 3px 0;
     outline: none;
     font-size: 1.1em;
+    color: #eee;
+    &:disabled {
+      background: #ddd;
+      color: #ccc;
+    }
   }
 
   .token {
@@ -55,18 +79,25 @@
       align-items: center;
       flex: 1;
       height: 40px;
-      border: 1px solid darkgrey;
+      border: 1px solid $DARK_GREY;
       border-radius: 3px 0 0 3px;
       border-width: 1px 0 1px 1px;
+      color: $DARK_GREY;
     }
 
     &__copy {
       width: 40px;
       height: 40px;
-      border: 1px solid darkgrey;
+      background: $PRIMARY;
+      border: 1px solid $DARK_GREY;
       border-radius: 0 3px 3px 0;
       outline: none;
       font-size: 1.1em;
+      svg {
+        path {
+          fill: white;
+        }
+      }
     }
   }
 
@@ -85,14 +116,14 @@
   width:32px;
   height:32px;
   border-radius:32px;
-  box-sizing:border-box;
-  border:1px solid black;
-  border-top-color:rgba(0,0,0,.7);
-  border-left-color:rgba(0,0,0,0.5);
-  border-bottom-color:rgba(0,0,0,0.3);
-  border-right-color:rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  border: 1px solid blue;
+  border-top-color: rgba(85, 154, 226,1);
+  border-left-color: rgba(85, 154, 226,0.75);
+  border-bottom-color: rgba(85, 154, 226,0.5);
+  border-right-color: rgba(85, 154, 226,0.25);
   animation: rotate 500ms infinite linear;
-  transform:translateZ(0px);
+  transform: translateZ(0px);
 }
 
 @keyframes rotate {  

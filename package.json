@@ -37,6 +37,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "clipboard": "^1.6.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
