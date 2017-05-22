@@ -3,6 +3,7 @@ const defaultState = {
   phoneNumber: '',
   token: '',
   placeHolder: 'enter a phone number',
+  error: '',
 };
 
 function account(state = defaultState, action) {
@@ -41,6 +42,11 @@ function account(state = defaultState, action) {
       return {
         ...state,
         token: '',
+      };
+    case 'ERROR':
+      return {
+        ...state,
+        error: action.message,
       };
     default:
       return state;

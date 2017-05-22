@@ -3,6 +3,7 @@ const ENTER_NUMBER = 'ENTER_NUMBER';
 const GET_TOKEN = 'GET_TOKEN';
 const PLACEHOLDER = 'PLACEHOLDER';
 const CLEAR_TOKEN = 'CLEAR_TOKEN';
+const ERROR = 'ERROR';
 
 export function enterNumber(value, backspace) {
   return {
@@ -29,5 +30,12 @@ export function placeHolder(value) {
 export function clearToken() {
   return {
     type: CLEAR_TOKEN,
+  };
+}
+
+export function error(message) {
+  return {
+    type: ERROR,
+    message,
   };
 }

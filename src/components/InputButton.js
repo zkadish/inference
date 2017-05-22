@@ -7,12 +7,13 @@ import cx from 'classnames';
 import * as action from 'redux/actions/actions';
 
 function InputButton({
-  phoneNumber,
-  enterNumber,
-  getToken,
-  placeHolder,
-  message,
   clearToken,
+  enterNumber,
+  error,
+  getToken,
+  message,
+  phoneNumber,
+  placeHolder,
   token,
 }) {
   const onSubmit = () => {
@@ -42,7 +43,7 @@ function InputButton({
       clearToken();
       placeHolder('enter a phone number');
     } else {
-
+      error('enter numbers only');
     }
   };
 
@@ -85,6 +86,7 @@ export default connect(
   }),
   dispatch => ({
     enterNumber: (number, backspace) => dispatch(action.enterNumber(number, backspace)),
+    error: message => dispatch(action.error(message)),
     getToken: (phoneNumber) => {
       // mock XHR fetch
       // pass the phone as a parameter?
