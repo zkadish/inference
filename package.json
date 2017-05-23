@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "rimraf dist/**",
-    "build": "NODE_ENV=production webpack -d",
-    "postbuild": "cp src/assets/favicon.ico dist/",
+    "prebuild": "rimraf inference_dist/**",
+    "build": "NODE_ENV=production webpack -p",
     "start": "NODE_ENV=development webpack-dev-server -d --progress --colors --hot --config ./webpack.config.js"
   },
   "keywords": [],

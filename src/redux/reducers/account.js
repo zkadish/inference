@@ -4,6 +4,8 @@ const defaultState = {
   token: '',
   placeHolder: 'enter a phone number',
   error: '',
+  secret: '',
+  konami: false,
 };
 
 function account(state = defaultState, action) {
@@ -47,6 +49,25 @@ function account(state = defaultState, action) {
       return {
         ...state,
         error: action.message,
+      };
+    case 'SECRET':
+      if (state.secret === '38384040373937396665') return { ...state };
+      if (`${state.secret}${action.value}` === '38384040373937396665') {
+        return {
+          ...state,
+          konami: true,
+          secret: `${state.secret}${action.value}`,
+        };
+      }
+      return {
+        ...state,
+        secret: `${state.secret}${action.value}`,
+      };
+    case 'ESCAPE':
+      return {
+        ...state,
+        konami: false,
+        secret: '',
       };
     default:
       return state;

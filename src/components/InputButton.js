@@ -10,11 +10,13 @@ function InputButton({
   clearToken,
   enterNumber,
   error,
+  escape,
   getToken,
   message,
   phoneNumber,
   placeHolder,
   token,
+  secret,
 }) {
   const onSubmit = () => {
     clearToken();
@@ -24,6 +26,7 @@ function InputButton({
   };
 
   const validateNum = (e) => {
+    console.log(e.keyCode);
     const index = e.target.value.length - 1;
     if (e.key === 'Enter' && phoneNumber.length === 0) {
       clearToken();
@@ -44,6 +47,11 @@ function InputButton({
       placeHolder('enter a phone number');
     } else {
       error('enter numbers only');
+      if (e.key === 'Escape') {
+        escape();
+        return;
+      }
+      secret(e.keyCode);
     }
   };
 
@@ -58,7 +66,7 @@ function InputButton({
           type="text"
           value={phoneNumber}
           placeholder={message}
-          onKeyDown={e => validateNum(e)}
+          onKeyUp={e => validateNum(e)}
         />
         <button
           className="interface__button"
@@ -85,8 +93,10 @@ export default connect(
     token: state.account.token,
   }),
   dispatch => ({
+    clearToken: () => dispatch(action.clearToken()),
     enterNumber: (number, backspace) => dispatch(action.enterNumber(number, backspace)),
     error: message => dispatch(action.error(message)),
+    escape: () => dispatch({ type: 'ESCAPE' }),
     getToken: (phoneNumber) => {
       // mock XHR fetch
       // pass the phone as a parameter?
@@ -94,7 +104,7 @@ export default connect(
         dispatch(action.getToken(uuid()));
       }, 1000);
     },
-    clearToken: () => dispatch(action.clearToken()),
     placeHolder: message => dispatch(action.placeHolder(message)),
+    secret: value => dispatch({ type: 'SECRET', value }),
   }),
 )(InputButton);

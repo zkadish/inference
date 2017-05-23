@@ -6,7 +6,9 @@ import InputButton from 'components/InputButton';
 import Loader from 'components/Loader';
 import CopyButton from 'components/CopyButton';
 
-function App({ token, phoneNumber, placeHolder }) {
+import Game from 'utils/game';
+
+function App({ token, phoneNumber, placeHolder, konami }) {
   const copyToken = (
     <div className="token">
       <div
@@ -25,6 +27,23 @@ function App({ token, phoneNumber, placeHolder }) {
     </div>
   );
 
+  const game = () => {
+    setTimeout(() => {
+      Game();
+    }, 1000);
+
+    return (
+      <div>
+        <div id="info">
+          <h1>Canvas Asteroids:</h1>
+          <p>Use [A][S][W][D] or [&larr;][&uarr;][&darr;][&rarr;] to MOVE</p>
+          <p>Use [SPACE] or [K] to SHOOT</p>
+        </div>
+        <canvas id="canvas" />
+      </div>
+    );
+  };
+
   return (
     <div>
       <h1 className="title">inference</h1>
@@ -34,6 +53,7 @@ function App({ token, phoneNumber, placeHolder }) {
         </form>
         {token ? copyToken : loader}
       </div>
+      {konami ? game() : ''}
     </div>
   );
 }
@@ -45,7 +65,7 @@ App.propTypes = {
 
 export default connect(
   state => ({
-    // phoneNumber: state.account.phoneNumber,
+    konami: state.account.konami,
     placeHolder: state.account.placeHolder,
     token: state.account.token,
   }),

@@ -8,21 +8,28 @@ const GLOBALS = {
   __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
 };
 
-console.log(GLOBALS.__DEV__);
+console.log('__DEV__', GLOBALS.__DEV__);
 
 const extractSass = new ExtractTextWebpackPlugin({
-  filename: '[name].[contenthash].css',
+  filename: 'css/[name].[contenthash].css',
   disable: process.env.NODE_ENV === 'development',
+});
+
+const htmlPlugin = new HtmlWebpackPlugin({
+  title: 'inference',
+  template: 'src/inference.html',
+  filename: process.env.NODE_ENV === 'development' ? 'index.html' : 'inference.html',
+  inject: true,
 });
 
 module.exports = {
   entry: {
-    app: './src/index.js',
+    inference: './src/index.js',
   },
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/inference_dist',
     publicPath: '/',
-    filename: '[name].js',
+    filename: 'js/[name].js',
   },
   module: {
     rules: [
@@ -54,11 +61,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
-    new HtmlWebpackPlugin({
-      title: 'inference',
-      template: 'src/index.html',
-      inject: true,
-    }),
+    htmlPlugin,
     extractSass,
   ],
   devtool: 'cheap-source-map',
