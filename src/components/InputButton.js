@@ -26,9 +26,8 @@ function InputButton({
   };
 
   const validateNum = (e) => {
-    console.log(e.keyCode);
     const index = e.target.value.length - 1;
-    if (e.key === 'Enter' && phoneNumber.length === 0) {
+    if (e.key === 'Enter' && token) {
       clearToken();
       placeHolder('enter a phone number');
       return;
@@ -67,6 +66,7 @@ function InputButton({
           value={phoneNumber}
           placeholder={message}
           onKeyUp={e => validateNum(e)}
+          autoFocus
         />
         <button
           className="interface__button"

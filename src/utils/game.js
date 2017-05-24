@@ -447,8 +447,7 @@ const Game = () => {
 
 	function keyboardInit()
 	{
-		window.onkeydown = function(e)
-		{
+		window.onkeydown = function(e) {
 			switch(e.keyCode)
 			{
 				//key A or LEFT
@@ -570,7 +569,10 @@ const Game = () => {
 
 	function loop() {
 		if (Esc) {
-			console.log('loop ended!');
+			console.log('game loop ended!');
+			window.onkeydown = null;
+			window.onkeyup = null;
+			window.onresize = null;
 			return;
 		}
 		updateShip();
